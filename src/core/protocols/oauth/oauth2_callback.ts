@@ -18,6 +18,7 @@ export async function OAuth2Callback(
   secret: string,
   successRedirectPath: string,
   errorRedirectPath: string,
+  tokenExpiration: number,
 ): Promise<Response> {
   const parsedCookies = parseCookies(request.headers)
 
@@ -98,5 +99,6 @@ export async function OAuth2Callback(
     successRedirectPath,
     errorRedirectPath,
     userData,
+    tokenExpiration,
   )
 }

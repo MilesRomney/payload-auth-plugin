@@ -33,6 +33,7 @@ export async function OAuthAuthentication(
     picture?: string | undefined
     access_token: string
   },
+  tokenExpiration: number,
 ): Promise<Response> {
   const {
     email: _email,
@@ -152,7 +153,7 @@ export async function OAuthAuthentication(
         sid: sessionID,
         collection: collections.usersCollection,
       },
-      useAdmin ? collectionConfig?.auth.tokenExpiration : undefined,
+      useAdmin ? (collectionConfig?.auth.tokenExpiration ?? tokenExpiration) : tokenExpiration,
     )),
   ]
   cookies = invalidateOAuthCookies(cookies)

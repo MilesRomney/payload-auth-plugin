@@ -39,6 +39,7 @@ export class OAuthEndpointStrategy implements EndpointStrategy {
     useAdmin,
     successRedirectPath,
     errorRedirectPath,
+    tokenExpiration,
   }: {
     pluginType: string
     collections: {
@@ -49,6 +50,7 @@ export class OAuthEndpointStrategy implements EndpointStrategy {
     useAdmin: boolean
     successRedirectPath: string
     errorRedirectPath: string
+    tokenExpiration: number
   }): Endpoint[] {
     return [
       {
@@ -69,6 +71,7 @@ export class OAuthEndpointStrategy implements EndpointStrategy {
             provider,
             successRedirectPath,
             errorRedirectPath,
+            tokenExpiration,
           )
         },
       },
@@ -180,12 +183,18 @@ export class SessionEndpointStrategy implements EndpointStrategy {
       usersCollectionSlug: string
     },
   ) {}
-  createEndpoints({ pluginType }: { pluginType: string }): Endpoint[] {
+  createEndpoints({ 
+    pluginType, 
+    tokenExpiration 
+  }: { 
+    pluginType: string
+    tokenExpiration: number 
+  }): Endpoint[] {
     return [
       {
         path: `/${pluginType}/session/:kind`,
         handler: (request: PayloadRequest) => {
-          return SessionHandlers(request, pluginType, this.internals)
+          return SessionHandlers(request, pluginType, this.internals, tokenExpiration)
         },
         method: "get",
       },
@@ -215,6 +224,7 @@ export class EndpointsFactory {
     private useAdmin: boolean,
     private successRedirectPath: string,
     private errorRedirectPath: string,
+    private tokenExpiration: number = 7200,
   ) {}
 
   registerStrategy(name: Strategies, strategy: EndpointStrategy): void {
@@ -236,6 +246,7 @@ export class EndpointsFactory {
       collections: this.collections,
       successRedirectPath: this.successRedirectPath,
       errorRedirectPath: this.errorRedirectPath,
+      tokenExpiration: this.tokenExpiration,
       ...config,
     })
   }

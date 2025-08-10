@@ -9,6 +9,7 @@ import { ErrorKind, SuccessKind } from "../../types.js"
 export const SessionRefresh = async (
   cookieName: string,
   request: PayloadRequest,
+  tokenExpiration: number,
 ) => {
   const { payload } = request
   const cookies = parseCookies(request.headers)
@@ -27,6 +28,7 @@ export const SessionRefresh = async (
       cookieName,
       payload.secret,
       jwtResponse.payload,
+      tokenExpiration,
     )),
   ]
 

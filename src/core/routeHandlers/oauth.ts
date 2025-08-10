@@ -23,6 +23,7 @@ export function OAuthHandlers(
   provider: OAuthProviderConfig,
   successRedirectPath: string,
   errorRedirectPath: string,
+  tokenExpiration: number,
 ): Promise<Response> {
   if (!provider) {
     throw new InvalidProvider()
@@ -53,6 +54,7 @@ export function OAuthHandlers(
             secret,
             successRedirectPath,
             errorRedirectPath,
+            tokenExpiration,
           )
         }
         case "oauth2": {
@@ -66,6 +68,7 @@ export function OAuthHandlers(
             secret,
             successRedirectPath,
             errorRedirectPath,
+            tokenExpiration,
           )
         }
         default:

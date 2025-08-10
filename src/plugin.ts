@@ -120,6 +120,13 @@ interface PluginOptions {
    * Example: /dashboard or /admin or /profile
    */
   errorRedirectPath: string
+
+  /**
+   * Token expiration time in seconds.
+   *
+   * @default 7200 (2 hours)
+   */
+  tokenExpiration?: number
 }
 
 export const authPlugin =
@@ -143,6 +150,7 @@ export const authPlugin =
       useAdmin,
       successRedirectPath,
       errorRedirectPath,
+      tokenExpiration,
     } = pluginOptions
 
     preflightCollectionCheck(
@@ -166,6 +174,7 @@ export const authPlugin =
       !!useAdmin,
       successRedirectPath,
       errorRedirectPath,
+      tokenExpiration ?? 7200,
     )
 
     let oauthEndpoints: Endpoint[] = []

@@ -13,6 +13,7 @@ export function SessionHandlers(
   internals: {
     usersCollectionSlug: string
   },
+  tokenExpiration: number,
 ) {
   if (pluginType === "admin") {
     // TODO: Implementation is not necessary as it is already handled by Payload. But can be customised.
@@ -23,7 +24,7 @@ export function SessionHandlers(
 
   switch (kind) {
     case "refresh":
-      return SessionRefresh(`__${pluginType}-${APP_COOKIE_SUFFIX}`, request)
+      return SessionRefresh(`__${pluginType}-${APP_COOKIE_SUFFIX}`, request, tokenExpiration)
     case "user":
       return SessionUser(
         `__${pluginType}-${APP_COOKIE_SUFFIX}`,
