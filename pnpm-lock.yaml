@@ -23,6 +23,9 @@ importers:
       payload:
         specifier: latest
         version: 3.50.0(graphql@16.11.0)(typescript@5.9.2)
+      payload-auth-plugin:
+        specifier: github:MilesRomney/payload-auth-plugin
+        version: https://codeload.github.com/MilesRomney/payload-auth-plugin/tar.gz/a2835de4edfe8d2d1755374dd58b0e03bdecda91
       qs-esm:
         specifier: 7.0.2
         version: 7.0.2
@@ -809,6 +812,12 @@ packages:
   path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
+
+  payload-auth-plugin@https://codeload.github.com/MilesRomney/payload-auth-plugin/tar.gz/a2835de4edfe8d2d1755374dd58b0e03bdecda91:
+    resolution: {tarball: https://codeload.github.com/MilesRomney/payload-auth-plugin/tar.gz/a2835de4edfe8d2d1755374dd58b0e03bdecda91}
+    version: 0.7.4
+    peerDependencies:
+      payload: latest
 
   payload@3.50.0:
     resolution: {integrity: sha512-zIDV+NRjp/unb4rPBp7SxOgc1vTKh/ZvNckMEvUgB4OG3XW7tiI/93CCZkht2kNsK9f+KpZqjsOQ2eFPfQ0DaA==}
@@ -1837,6 +1846,15 @@ snapshots:
   path-to-regexp@6.3.0: {}
 
   path-type@4.0.0: {}
+
+  payload-auth-plugin@https://codeload.github.com/MilesRomney/payload-auth-plugin/tar.gz/a2835de4edfe8d2d1755374dd58b0e03bdecda91:
+    dependencies:
+      '@simplewebauthn/browser': 13.1.2
+      '@simplewebauthn/server': 13.1.2
+      jose: 6.0.8
+      oauth4webapi: 3.6.2
+      qs-esm: 7.0.2
+      uuid: 11.1.0
 
   payload@3.50.0(graphql@16.11.0)(typescript@5.9.2):
     dependencies:
